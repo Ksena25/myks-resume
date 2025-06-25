@@ -1,4 +1,4 @@
-name: Resume ci Buil
+name: Resume ci Build
 
 on:
   push:
@@ -14,7 +14,5 @@ jobs:
 
     steps:
     - uses: actions/checkout@v4
-    - name: Build the Docker image with tag
-      run: docker build . --file Dockerfile --tag my-image-name:${{github_number}}
-    - name: Build latest
-      run: docker build . --file Dockerfile --tag my-image-name
+    - name: Build the Docker image
+      run: docker build . --file Dockerfile --tag my-image-name:$(date +%s)
