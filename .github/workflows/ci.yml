@@ -15,13 +15,13 @@ jobs:
     steps:
     - uses: actions/checkout@v4
     - name: Build the Docker image with tag
-      run: docker build . --file Dockerfile --tag my-image-name:${{github.run_number}}
+      run: docker build . --file Dockerfile --tag my-imageks-name:${{github.run_number}}
     - name: Build latest
-      run: docker build . --file Dockerfile --tag my-image-name
+      run: docker build . --file Dockerfile --tag my-imageks-name
     - name: Login to Docker hub
-      run: docker login -u ${{secrets.REGISTRY_USER}} -p ${{secrets.REGISTRY_PASSW}}
+      run: docker login -u ${{secrets.REGISTRY_USERNAME}} -p ${{secrets.REGISTRY_PASS}}
     - name: Tag image
-      run: docker tag my-image-name:${{github.run_number}} ${{secrets.REGISTRY_USER}}/my-image-name:${{github.run_number}}
+      run: docker tag my-imageks-name:${{github.run_number}} ${{secrets.REGISTRY_USERNAME}}/my-imageks-name:${{github.run_number}}
     - name: Push image to registry
-      run: docker push ${{secrets.REGISTRY_USER}}/my-image-name:${{github.run_number}}
+      run: docker push ${{secrets.REGISTRY_USERNAME}}/my-imageks-name:${{github.run_number}}
 
