@@ -2,6 +2,10 @@ name: build push and deploy image
 
 on: 
   
+  Push:
+    branches: [main]
+  pull_request:
+    branches: [main]
 
 permissions:
   id-token: write
