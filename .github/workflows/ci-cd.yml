@@ -1,0 +1,31 @@
+name: build push and deploy image
+
+on: 
+  workflow_dispatch:
+
+  #Push:
+   # branches: [main]
+  #pull_request:
+  #  branches: [main]
+
+
+
+env:
+  AWS_REGION: us-east-1
+  AWS_ROLE: ${{ secrets.AWS_ACTION_ROLE }}
+
+jobs:
+  build:
+    runs-on: ubuntu-latest  # github runner which is share runner
+    steps:
+      - name: clone repo
+        uses: actions/checkout@v3 # means an action
+      - name: Aws creds config   #aws credentials
+        uses: aws-actions/configure-aws-credentials@v4
+        with:
+          role-to-assume: ${{ env.AWS_ROLE }}   # Open ID Connect (OIDC)
+          aws-region: ${{ env.AWS_REGION }} # call the env. variable
+
+      - name: Login to ecr
+        uses: aws-actions/amazon-ecr-login@v1
+      
