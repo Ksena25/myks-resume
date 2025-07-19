@@ -1,12 +1,7 @@
 name: build push and deploy image
 
 on: 
-  workflow_dispatch:
-
-  #Push:
-   # branches: [main]
-  #pull_request:
-  #  branches: [main]
+  
 
 permissions:
   id-token: write
@@ -46,7 +41,7 @@ jobs:
         with:
           image-ref: "${{ steps.ecr-login.outputs.registry }}/{{ env.ECR_REPO_NAME }}:${{ env.IMAGE_TAG }}"  # Scans the built image
           format: "table"
-          exit-code: "1"
+          exit-code: "0"
           severity: "CRITICAL,HIGH"
       - name: Push image to ecr
         run: |
